@@ -1,7 +1,7 @@
 package com.SupplyOrder.service;
 
-import com.SupplyOrder.model.Employees;
-import com.SupplyOrder.repository.EmployeesRepository;
+import com.SupplyOrder.model.Customers;
+import com.SupplyOrder.repository.CustomersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,20 +14,20 @@ import java.util.Collection;
  */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-public class EmployeesService {
+public class CustomersService {
     @Autowired
-    private EmployeesRepository employeesRepository;
+    private CustomersRepository customersRepository;
 
-    public Collection<Employees> getAllEmployees() {
-        return employeesRepository.findAll();
+    public Collection<Customers> getAllCustomers() {
+        return customersRepository.findAll();
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public Employees addEmployee(Employees employee) {
-        if (employee.getEmployeeId() != null) {
+    public Customers addCustomer(Customers customer) {
+        if (customer.getCustomerId() != null) {
             // cannot create restaurant with specified id value
             return null;
         }
-        return employeesRepository.save(employee);
+        return customersRepository.save(customer);
     }
 }

@@ -1,5 +1,7 @@
 package com.SupplyOrder.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -33,6 +35,7 @@ public class Customers {
 
     private String fax;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "customers")
+    @JsonManagedReference(value = "customers")
     private Set<Orders> orders = new HashSet<>();
 
     public Long getCustomerId() {

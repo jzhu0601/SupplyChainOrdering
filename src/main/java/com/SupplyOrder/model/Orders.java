@@ -1,5 +1,8 @@
 package com.SupplyOrder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -18,15 +21,19 @@ public class Orders {
     private Long orderId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+    @JsonManagedReference(value = "orders")
     Set<OrderDetails> orderDetails = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "customers")
     private Customers customers;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "employees")
     private Employees employees;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "shippers")
     private Shippers shippers;
 
     @NotNull
@@ -57,6 +64,15 @@ public class Orders {
     private String shipPostalCode;
     @NotNull
     private String shipCountry;
+
+    @Transient
+    private Long employeeId;
+
+    @Transient
+    private Long customerId;
+
+    @Transient
+    private Long shipperId;
 
     public Long getOrderId() {
         return orderId;
@@ -184,5 +200,29 @@ public class Orders {
 
     public void setOrderDetails(Set<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
+
+    public Long getShipperId() {
+        return shipperId;
+    }
+
+    public void setShipperId(Long shipperId) {
+        this.shipperId = shipperId;
     }
 }

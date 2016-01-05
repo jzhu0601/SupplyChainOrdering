@@ -1,6 +1,7 @@
 package com.SupplyOrder.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -43,6 +44,7 @@ public class Products {
     private Boolean discontinued;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
+    @JsonManagedReference(value = "products")
     private Set<OrderDetails> orderDetails = new HashSet<>();
 
     @Transient

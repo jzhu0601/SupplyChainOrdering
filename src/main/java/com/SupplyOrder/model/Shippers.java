@@ -1,5 +1,7 @@
 package com.SupplyOrder.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -19,7 +21,9 @@ public class Shippers {
     private String companyName;
     @NotNull
     private String phone;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "shippers")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shippers")
+    @JsonManagedReference(value = "shippers")
     Set<Orders> orders = new HashSet<>();
 
     public Long getShipperId() {

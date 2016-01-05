@@ -21,7 +21,7 @@ public class ProductsController {
         return new ResponseEntity<Products>(productsService.getProductById(productId), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/api/products", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/products", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Products> addProduct(@RequestBody Products product) {
         return new ResponseEntity<>(productsService.addProduct(product), HttpStatus.CREATED);
     }

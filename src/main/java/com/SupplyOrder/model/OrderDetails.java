@@ -1,5 +1,7 @@
 package com.SupplyOrder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -22,10 +24,18 @@ public class OrderDetails {
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "products")
     private Products products;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "orders")
     private Orders orders;
+
+    @Transient
+    private Long orderId;
+
+    @Transient
+    private Long productId;
 
     public Integer getQuantity() {
         return quantity;
@@ -65,5 +75,21 @@ public class OrderDetails {
 
     public void setOrderDetailsId(Long orderDetailsId) {
         this.orderDetailsId = orderDetailsId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

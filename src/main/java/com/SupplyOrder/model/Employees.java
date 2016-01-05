@@ -1,11 +1,12 @@
 package com.SupplyOrder.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Jason on 1/4/16.
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Employees {
 
     @Id
+    @GeneratedValue
     private Long employeeId;
 
     @NotNull
@@ -49,6 +51,9 @@ public class Employees {
     @NotNull
     private Long reportsTo;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employees")
+    @JsonManagedReference(value = "employees")
+    private Set<Orders> orders = new HashSet<>();
 
     public Long getEmployeeId() {
         return employeeId;
@@ -184,5 +189,13 @@ public class Employees {
 
     public void setReportsTo(Long reportsTo) {
         this.reportsTo = reportsTo;
+    }
+
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
     }
 }
