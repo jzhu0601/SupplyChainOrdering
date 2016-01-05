@@ -1,7 +1,7 @@
 package com.SupplyOrder.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -15,8 +15,10 @@ public class OrderDetails {
     private Long orderDetailsId;
 
     @Column(precision = 15, scale = 2)
+    @NotNull
     private BigDecimal unitPrice;
 
+    @NotNull
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)

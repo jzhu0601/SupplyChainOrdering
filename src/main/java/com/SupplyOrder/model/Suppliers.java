@@ -1,6 +1,12 @@
 package com.SupplyOrder.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,22 +17,30 @@ import java.util.Set;
 public class Suppliers {
 
     @Id
-    @GeneratedValue
     private Long supplierId;
 
+    @NotNull
     private String companyName;
+    @NotNull
     private String contactName;
     private String contactTitle;
+    @NotNull
     private String address;
+    @NotNull
     private String city;
+    @NotNull
     private String region;
+    @NotNull
     private String postalCode;
+    @NotNull
     private String country;
+    @NotNull
     private String phone;
     private String fax;
     private String homepage;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "suppliers")
+    @JsonManagedReference(value = "suppliers")
     private Set<Products> products = new HashSet<>();
 
     public String getHomepage() {

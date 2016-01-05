@@ -1,6 +1,7 @@
 package com.SupplyOrder.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
@@ -28,16 +29,33 @@ public class Orders {
     @ManyToOne(fetch = FetchType.LAZY)
     private Shippers shippers;
 
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date orderDate;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date requiredDate;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date shippedDate;
+
+    @NotNull
     private String shipVia;
+    @NotNull
     private BigDecimal freight;
+    @NotNull
     private String shipName;
+    @NotNull
     private String shipAdddress;
+    @NotNull
     private String shipCity;
+    @NotNull
     private String shipReigon;
+    @NotNull
     private String shipPostalCode;
+    @NotNull
     private String shipCountry;
 
     public Long getOrderId() {

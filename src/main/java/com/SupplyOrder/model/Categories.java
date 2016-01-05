@@ -1,6 +1,12 @@
 package com.SupplyOrder.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,16 +16,18 @@ import java.util.Set;
 @Entity
 public class Categories {
     @Id
-    @GeneratedValue
     private Long categoryId;
 
+    @NotNull
     private String categoryName;
 
+    @NotNull
     private String description;
 
     private byte[] picture;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+    @JsonManagedReference(value = "categories")
     private Set<Products> products = new HashSet<>();
 
     public Long getCategoryId() {

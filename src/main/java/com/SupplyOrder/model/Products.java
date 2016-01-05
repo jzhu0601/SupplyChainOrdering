@@ -1,6 +1,9 @@
 package com.SupplyOrder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,26 +16,40 @@ public class Products {
     @Id
     @GeneratedValue
     private Long productId;
+    @NotNull
     private String productName;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "suppliers")
     private Suppliers suppliers;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "categories")
     private Categories categories;
 
+    @NotNull
     private Integer quantityPerUnit;
 
     @Column(precision = 15, scale = 2)
     private BigDecimal unitPrice;
 
+    @NotNull
     private Integer unitsInStock;
+    @NotNull
     private Integer unitsOnOrder;
+    @NotNull
     private Integer reorderLevel;
+    @NotNull
     private Boolean discontinued;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "products")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
     private Set<OrderDetails> orderDetails = new HashSet<>();
+
+    @Transient
+    private Long supplierId;
+
+    @Transient
+    private Long categoryId;
 
     public Long getProductId() {
         return productId;
@@ -120,5 +137,21 @@ public class Products {
 
     public void setOrderDetails(Set<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

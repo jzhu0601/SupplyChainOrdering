@@ -1,6 +1,7 @@
 package com.SupplyOrder.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,15 +13,24 @@ public class Customers {
     @Id
     @GeneratedValue
     private Long customerId;
+    @NotNull
     private String companyName;
+    @NotNull
     private String contactName;
     private String contactTitle;
+    @NotNull
     private String address;
+    @NotNull
     private String city;
+    @NotNull
     private String region;
+    @NotNull
     private String postalCode;
+    @NotNull
     private String country;
+    @NotNull
     private String phone;
+
     private String fax;
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "customers")
     private Set<Orders> orders = new HashSet<>();

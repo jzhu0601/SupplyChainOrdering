@@ -1,8 +1,10 @@
 package com.SupplyOrder.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -12,25 +14,41 @@ import java.util.Date;
 public class Employees {
 
     @Id
-    @GeneratedValue
     private Long employeeId;
 
+    @NotNull
     private String lastName;
+    @NotNull
     private String firstName;
+    @NotNull
     private String title;
-    private String titelOfCourtesy;
+    private String titleOfCourtesy;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date birthday;
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
     private Date hireDate;
+    @NotNull
     private String address;
+    @NotNull
     private String city;
+    @NotNull
     private String region;
+    @NotNull
     private String postalCode;
+    @NotNull
     private String country;
+    @NotNull
     private String homePhone;
     private String extension;
     private byte[] photo;
     private String notes;
-    private String reportsTo;
+    @NotNull
+    private Long reportsTo;
+
 
     public Long getEmployeeId() {
         return employeeId;
@@ -64,12 +82,12 @@ public class Employees {
         this.title = title;
     }
 
-    public String getTitelOfCourtesy() {
-        return titelOfCourtesy;
+    public String getTitleOfCourtesy() {
+        return titleOfCourtesy;
     }
 
-    public void setTitelOfCourtesy(String titelOfCourtesy) {
-        this.titelOfCourtesy = titelOfCourtesy;
+    public void setTitleOfCourtesy(String titelOfCourtesy) {
+        this.titleOfCourtesy = titelOfCourtesy;
     }
 
     public Date getBirthday() {
@@ -160,11 +178,11 @@ public class Employees {
         this.notes = notes;
     }
 
-    public String getReportsTo() {
+    public Long getReportsTo() {
         return reportsTo;
     }
 
-    public void setReportsTo(String reportsTo) {
+    public void setReportsTo(Long reportsTo) {
         this.reportsTo = reportsTo;
     }
 }
