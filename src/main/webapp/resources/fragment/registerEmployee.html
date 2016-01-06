@@ -1,0 +1,40 @@
+<form id="registerEmployeeForm">
+    Enter text and hit enter:</br>
+    <label for="firstName">First Name</label>
+    <input id="firstName" type="text" ng-model="firstName"/></br>
+    <label for="lastName">Last Name</label>
+    <input id="lastName" type="text" ng-model="lastName"/></br>
+    <label for="birthday">Date of Birth</label>
+    <input id="birthday" type="text" ng-model="birthday"/></br>
+    <label for="address">Home Address</label>
+    <input id="address" type="text" ng-model="address"/></br>
+    <label for="city">City</label>
+    <input id="city" type="text" ng-model="city"/></br>
+    <label for="region">Region</label>
+    <input id="region" type="text" ng-model="region"/></br>
+    <label for="postal_code">Postal Code</label>
+    <input id="postal_code" type="text" ng-model="postal_code"/></br>
+    <label for="country">Country</label>
+    <input id="country" type="text" ng-model="country"/></br>
+    <label for="title">Job Title</label>
+    <input id="title" type="text" ng-model="title"/></br>
+    <label for="title_of_courtesy">Title of Courtesy</label>
+    <input id="title_of_courtesy" type="text" ng-model="title_of_courtesy"/></br>
+    <label for="reports_to">Reports To</label>
+    <input id="reports_to" type="text" ng-model="reports_to"/></br>
+    <label for="extension">Extension</label>
+    <input id="extension" type="text" ng-model="extension"/></br>
+    <label for="hire_date">Hire Date</label>
+    <input id="hire_date" type="text" ng-model="hire_date"/></br>
+    <label for="home_phone">Home Phone</label>
+    <input id="home_phone" type="text" ng-model="home_phone"/></br>
+    <label for="notes">Notes</label>
+    <input id="notes" type="text" ng-model="notes"/></br>
+    <button id="registerEmployee" ng-click="registerEmployee()">Register Employee</button>
+</form>
+
+<div>
+    <label for="photo">Photo</label>
+    <input id="photo" type="file" file-model="myFile"/>
+    <button ng-click="uploadFile()">upload me</button>
+</div>
