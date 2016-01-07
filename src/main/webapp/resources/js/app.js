@@ -20,36 +20,33 @@
             })
     });//end config
 
-    //supplyOrderApp.directive('fileModel', ['$parse', function ($parse) {
-    //    return {
-    //        restrict: 'A',
-    //        link: function (scope, element, attrs) {
-    //            var model = $parse(attrs.fileModel);
-    //            var modelSetter = model.assign;
-    //
-    //            element.bind('change', function () {
-    //                scope.$apply(function () {
-    //                    modelSetter(scope, element[0].files[0]);
-    //                });
-    //            });
-    //        }
-    //    };
-    //}]);
+    supplyOrderApp.directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
 
-    //supplyOrderApp.service('fileUpload', ['$http', function ($http) {
-    //    this.uploadFileToUrl = function (file, uploadUrl) {
-    //        var fd = new FormData();
-    //        fd.append('file', file);
-    //        $http.post(uploadUrl, fd, {
-    //                transformRequest: angular.identity,
-    //                headers: {'Content-Type': undefined}
-    //            })
-    //            .success(function () {
-    //            })
-    //            .error(function () {
-    //            });
-    //    }
-    //}]);
+                element.bind('change', function () {
+                    scope.$apply(function () {
+                        modelSetter(scope, element[0].files[0]);
+                    })
+                })
+            }
+        }
+    }]);
+
+    supplyOrderApp.service('multipartForm', ['$http', function ($http) {
+        this.post = function (uploadUrl, data) {
+            var fd = new FormData();
+            for (var key in data)
+                fd.append(key, data[key]);
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.indentity,
+                headers: {'Content-Type': undefined}
+            });
+        }
+    }]);
 
 
 })();//end IFFE
